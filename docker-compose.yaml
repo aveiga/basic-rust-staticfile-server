@@ -1,60 +1,69 @@
 version: "3.0"
 services:
-  keycloakpostgres:
-    image: postgres
-    restart: always
+  app:
+    build: # "context" and "dockerfile" fields have to be under "build"
+      context: .
+      dockerfile: Dockerfile.dev
     volumes:
-      - ./tmp/keycloakpostgres/pgdata:/var/lib/postgresql/data/pgdata
+      - ./:/usr/src/app
+      - cargo-cache:/usr/local/cargo/registry/:cached
     ports:
-      - 5432:5432
-    environment:
-      POSTGRES_DB: keycloak
-      POSTGRES_USER: keycloak
-      POSTGRES_PASSWORD: password
-      PGDATA: /var/lib/postgresql/data/pgdata
-  keycloak:
-    image: aveiga/keycloak:14.0.0
-    ports:
-      - 8080:8080
-    environment:
-      DB_VENDOR: POSTGRES
-      DB_ADDR: keycloakpostgres
-      DB_DATABASE: keycloak
-      DB_USER: keycloak
-      DB_SCHEMA: public
-      DB_PASSWORD: password
-      KEYCLOAK_USER: admin
-      KEYCLOAK_PASSWORD: password
-    depends_on:
-      - keycloakpostgres
-  apppostgres:
-    image: postgres
-    restart: always
-    volumes:
-      - ./tmp/apppostgres/pgdata:/var/lib/postgresql/data/pgdata
-    ports:
-      - 5433:5432
-    environment:
-      POSTGRES_PASSWORD: "stuff"
-      PGDATA: /var/lib/postgresql/data/pgdata
-  rabbitmq:
-    image: rabbitmq:3-management
-    restart: always
-    ports:
-      - 5672:5672
-      - 15672:15672
-    volumes:
-      - ./tmp/rabbitmq/:/var/lib/rabbitmq
-    hostname: my-rabbit
-  redis:
-    image: "bitnami/redis:latest"
-    # networks:
-    #   consul-network:
-    #     ipv4_address: 172.18.0.5
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-    ports:
-      - "6379:6379"
+      - 3030:3030
+#  keycloakpostgres:
+#    image: postgres
+#    restart: always
+#    volumes:
+#      - ./tmp/keycloakpostgres/pgdata:/var/lib/postgresql/data/pgdata
+#    ports:
+#      - 5432:5432
+#    environment:
+#      POSTGRES_DB: keycloak
+#      POSTGRES_USER: keycloak
+#      POSTGRES_PASSWORD: password
+#      PGDATA: /var/lib/postgresql/data/pgdata
+#  keycloak:
+#    image: aveiga/keycloak:14.0.0
+#    ports:
+#      - 8080:8080
+#    environment:
+#      DB_VENDOR: POSTGRES
+#      DB_ADDR: keycloakpostgres
+#      DB_DATABASE: keycloak
+#      DB_USER: keycloak
+#      DB_SCHEMA: public
+#      DB_PASSWORD: password
+#      KEYCLOAK_USER: admin
+#      KEYCLOAK_PASSWORD: password
+#    depends_on:
+#      - keycloakpostgres
+#  apppostgres:
+#    image: postgres
+#    restart: always
+#    volumes:
+#      - ./tmp/apppostgres/pgdata:/var/lib/postgresql/data/pgdata
+#    ports:
+#      - 5433:5432
+#    environment:
+#      POSTGRES_PASSWORD: "stuff"
+#      PGDATA: /var/lib/postgresql/data/pgdata
+#  rabbitmq:
+#    image: rabbitmq:3-management
+#    restart: always
+#    ports:
+#      - 5672:5672
+#      - 15672:15672
+#    volumes:
+#      - ./tmp/rabbitmq/:/var/lib/rabbitmq
+#    hostname: my-rabbit
+#  redis:
+#    image: "bitnami/redis:latest"
+#    # networks:
+#    #   consul-network:
+#    #     ipv4_address: 172.18.0.5
+#    environment:
+#      - ALLOW_EMPTY_PASSWORD=yes
+#    ports:
+#      - "6379:6379"
 
 # jaeger:
 #   image: jaegertracing/all-in-one
@@ -69,3 +78,6 @@ services:
 #   depends_on:
 #     - consul
 #     - postgres
+
+volumes:
+  cargo-cache:

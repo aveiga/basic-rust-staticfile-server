@@ -21,6 +21,9 @@ Rust Microservice Archetype
 - Developing and serving UI fragments
 - Serving UI assets
 
+## Dev setup
+- Install cargo-watch: `cargo install cargo-watch`
+
 ## To cleanup
 
 ## FAQ
