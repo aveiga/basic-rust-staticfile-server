@@ -1,14 +1,9 @@
-// use std::str::FromStr;
-// use std::io::{Error, ErrorKind};
+use rust_microservice_archetype::run;
 
-use warp::Filter;
+mod dtos;
+mod handlers;
 
 #[tokio::main]
 async fn main() {
-    let hello = warp::get()
-        .map(|| format!("Hello, World!"));
-
-    warp::serve(hello)
-        .run(([0, 0, 0, 0], 3030))
-        .await;
+    run().await;
 }
