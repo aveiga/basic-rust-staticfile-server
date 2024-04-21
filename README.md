@@ -14,7 +14,7 @@ Rust Microservice Archetype
 - [DB Versioning with SQLX](https://docs.rs/sqlx/latest/sqlx/macro.migrate.html)
 - [Authentication and Authorization using OAuth v2 with ???]()
 - [Service Discovery with Eureka Client]()
-- [Logging with log4rs](https://docs.rs/log4rs/latest/log4rs/)
+- [Logging with SLOG](https://docs.rs/slog/latest/slog/)
 - [Testing]()
 - [API Documentation with utoipa](https://docs.rs/utoipa/latest/utoipa/)
 - [Monitoring with ???]()
