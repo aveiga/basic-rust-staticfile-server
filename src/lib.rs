@@ -1,8 +1,6 @@
 mod commons;
 mod handlers;
 
-use std::ptr::null;
-
 use serde_derive::{Deserialize, Serialize};
 use warp::http::Method;
 use warp::{Filter, Reply};
