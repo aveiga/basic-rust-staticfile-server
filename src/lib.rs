@@ -17,9 +17,9 @@ pub async fn build_routes() -> impl Filter<Extract = impl Reply> + Clone {
     let log = warp::log::custom(move |info| {
         commons::logger::info(
             "".to_string(),
-            info.method().to_string(),
-            info.path().to_string(),
-            info.status().as_u16(),
+            Some(info.method().to_string()),
+            Some(info.path().to_string()),
+            Some(info.status().as_u16()),
         )
     });
 
@@ -41,14 +41,12 @@ pub async fn build_routes() -> impl Filter<Extract = impl Reply> + Clone {
 pub async fn run() {
     let port = 3030;
 
-    let log = CustomLog {
-        active: true,
-        username: "aveiga".to_string(),
-    };
-
-    commons::logger::info("cenas".to_string(), "", "".to_string(), 0);
-
-    //slog::info!(logger, "Logging a complex object"; "field1" => log.active, "field2" => log.username);
+    commons::logger::info(
+        format!("Server starting on port {}", port),
+        None,
+        None,
+        None,
+    );
 
     let routes = build_routes().await;
     warp::serve(routes).run(([0, 0, 0, 0], port)).await;

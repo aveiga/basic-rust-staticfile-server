@@ -9,5 +9,5 @@ pub fn info(message: String, method: Option<String>, path: Option<String>, statu
 
     let logger = Logger::root(drain, o!());
 
-    slog::info!(logger, "Request"; "message" => message, "method" => method.unwrap_or(String::from("")), "path" => path.unwrap_or(String::from("")), "status" => status)
+    slog::info!(logger, "Request"; "message" => message, "method" => method.unwrap_or(String::from("")), "path" => path.unwrap_or(String::from("")), "status" => status.unwrap_or(0))
 }
