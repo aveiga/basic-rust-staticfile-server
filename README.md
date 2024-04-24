@@ -4,8 +4,8 @@ Rust Microservice Archetype
 
 ## Topics covered
 
-- [REST with Warp](https://github.com/seanmonstar/warp)
-- [Error Handling with Warp](https://github.com/Rust-Web-Development/code/blob/main/ch_11/handle-errors/src/lib.rs)
+- ✅[REST with Warp](https://github.com/seanmonstar/warp)
+- ✅[Error Handling with Warp](https://github.com/Rust-Web-Development/code/blob/main/ch_11/handle-errors/src/lib.rs)
 - [REST Calls with reqwest](https://rust-lang-nursery.github.io/rust-cookbook/web/clients/apis.html)
 - [Messaging using amqp-rs](https://github.com/gftea/amqprs)
 - [Input Validation with Validator](https://github.com/Keats/validator). [See also](https://blog.logrocket.com/json-input-validation-in-rust-web-services/)
@@ -14,11 +14,10 @@ Rust Microservice Archetype
 - [DB Versioning with SQLX](https://docs.rs/sqlx/latest/sqlx/macro.migrate.html)
 - [Authentication and Authorization using OAuth v2 with ???]()
 - [Service Discovery with Eureka Client]()
-- [Logging with SLOG](https://docs.rs/slog/latest/slog/)
+- ✅[Logging with SLOG](https://docs.rs/slog/latest/slog/)
 - [Testing]()
 - [API Documentation with utoipa](https://docs.rs/utoipa/latest/utoipa/)
 - [Monitoring with ???]()
-- [Websockets with Warp]()
 
 ## Dev setup
 
