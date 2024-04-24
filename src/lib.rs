@@ -34,7 +34,10 @@ pub async fn build_routes() -> impl Filter<Extract = impl Reply> + Clone {
         .and_then(handlers::flat_entries_handlers::get_flat_entries);
     //.recover(return_error)
 
-    get_messages.with(cors).with(log)
+    get_messages
+        .with(cors)
+        .with(log)
+        .recover(commons::handle_errors::return_error)
 }
 pub async fn run() {
     let port = 3030;
