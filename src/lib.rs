@@ -1,4 +1,5 @@
 mod commons;
+mod dtos;
 mod handlers;
 
 use serde_derive::{Deserialize, Serialize};
@@ -32,9 +33,15 @@ pub async fn build_routes() -> impl Filter<Extract = impl Reply> + Clone {
         .and(warp::path("flatEntries"))
         .and(warp::path::end())
         .and_then(handlers::flat_entries_handlers::get_flat_entries);
-    //.recover(return_error)
+
+    let post_messages = warp::post()
+        .and(warp::path("flatEntries"))
+        .and(warp::path::end())
+        .and(warp::body::json())
+        .and_then(handlers::flat_entries_handlers::post_flat_entries);
 
     get_messages
+        .or(post_messages)
         .with(cors)
         .with(log)
         .recover(commons::handle_errors::return_error)
